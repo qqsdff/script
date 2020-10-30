@@ -19,10 +19,10 @@
 *************************
 [rewrite_local]
 # 获取电信Cookie
-^http://wt.189.cn/wx/czwap/phonebill2.do url script-request-body 10001.js
+^http://wt.189.cn/wx/czwap/phonebill2.do url script-request-body https://raw.githubusercontent.com/15321929422/script/main/10001.js
 
 [task_local]
-5 0 * * * 10001.js, tag=电信余额
+5 0 * * * https://raw.githubusercontent.com/15321929422/script/main/10001.js, tag=电信余额
 
 *************************/
 var $nobyda = nobyda();
