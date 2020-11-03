@@ -263,7 +263,7 @@ function getBalance(key){
                 if (cc.error) {
                     str += "获取余额失败\n";
                 } else {
-                    str += "我的余额:" + cc.allmoney + "元" + "\n本月话费：" + cc.monthused + "元\n";
+                    str += "我的余额:" + cc.allmoney + "元" + "\n本月话费:" + cc.monthused + "元\n";
                 }
             } catch (eor) {
                 str += eor + "\n";
