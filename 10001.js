@@ -248,7 +248,7 @@ function change(num) {
         return num1.substring(0, num1.lastIndexOf('.') + 3) + "MB";
     }
 }
-function getBalance(){
+function getBalance(key){
  return new Promise(resolve => {
   $nobyda.post({
             url: 'http://wt.189.cn/wx/czwap/phonebill2.do',
@@ -256,7 +256,7 @@ function getBalance(){
                 "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
             },
             body: "phone=" + key
-        }, (error, response, data) => {
+        }, async function (error, response, data) => {
             try {
                 console.log(data);
                 if (error) throw new Error(error);
@@ -274,15 +274,15 @@ function getBalance(){
         });
  });
 }
-function getTraffic(){
+function getTraffic(key){
  return new Promise(resolve => {
   $nobyda.post({
-                url: 'http://wt.189.cn//wx/czwap/notll_tcquery3.do',
+                url: 'http://wt.189.cn//wx/czwap\notll_tcquery3.do',
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
                 },
                 body: "phone=" + key
-            }, (error, response, data) => {
+            }, async function(error, response, data) => {
                 try {
                     console.log(data);
                     if (error) throw new Error(error);
@@ -294,21 +294,21 @@ function getTraffic(){
                             var flag = item.flag;
                             if (flag == 1) {
                                 if (item.symount > 0) {
-                                    str += "国际剩余流量:" + change(item.symount) + "/n";
+                                    str += "国际剩余流量:" + change(item.symount) + "\n";
                                 }
                             } else if (flag == 2) {
                                 if (item.symount > 0) {
-                                    str += "国内剩余流量:" + change(item.symount) + "/n";
+                                    str += "国内剩余流量:" + change(item.symount) + "\n";
                                 }
 
                             } else if (flag == 3) {
                                 if (item.symount > 0) {
-                                    str += "省内剩余流量:" + change(item.symount) + "/n";
+                                    str += "省内剩余流量:" + change(item.symount) + "\n";
                                 }
 
                             } else if (flag == 4) {
                                 if (item.symount > 0) {
-                                    str += "本地剩余流量:" + change(item.symount) + "/n";
+                                    str += "本地剩余流量:" + change(item.symount) + "\n";
                                 }
 
                             }
@@ -322,7 +322,6 @@ function getTraffic(){
            });}
 		   );
 }
-async function init(){
 if ($nobyda.isRequest) {
     if ($request.headers && $request.url.match(/phonebill2/)) {
         $nobyda.write($request.body.replace("phone=", ""), "dxPhone");
@@ -334,17 +333,15 @@ if ($nobyda.isRequest) {
 } else {
     var key = $nobyda.read("dxPhone");
     if (key) {
-      await Promise.all([
-	  getBalance(),
-	  getTraffic()
-	  ]);
-	    $nobyda.notify("电信", "", str);
-         $nobyda.done();
-        } 
-		else {
-            $nobyda.notify("电信", "", "脚本终止, 未获取Cookie ‼️");
-            $nobyda.done();
-        }
+        await Promise.all([
+            getBalance(key),
+            getTraffic(key)
+        ]);
+        $nobyda.notify("电信", "", str);
+        $nobyda.done();
+    } else {
+        $nobyda.notify("电信", "", "脚本终止, 未获取Cookie ‼️");
+        $nobyda.done();
     }
 }
-init();
+}
