@@ -256,9 +256,8 @@ function getBalance(key){
                 "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
             },
             body: "phone=" + key
-        }, async function (error, response, data) => {
+        },function (error, response, data) => {
             try {
-                console.log(data);
                 if (error) throw new Error(error);
                 const cc = JSON.parse(data);
                 if (cc.error) {
@@ -282,15 +281,14 @@ function getTraffic(key){
                     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
                 },
                 body: "phone=" + key
-            }, async function(error, response, data) => {
+            }, function(error, response, data) => {
                 try {
-                    console.log(data);
                     if (error) throw new Error(error);
                     const cc = JSON.parse(data);
                     if (cc.error) {
                         str += "获取余额失败\n";
                     } else {
-                        for (var item of data) {
+                        for (var item of cc) {
                             var flag = item.flag;
                             if (flag == 1) {
                                 if (item.symount > 0) {
