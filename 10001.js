@@ -247,7 +247,7 @@ if ($nobyda.isRequest) {
 				if (cc.error) {
 					$nobyda.notify("电信余额", "","获取余额失败");
 				} else {
-					$nobyda.notify("电信余额", "", "我的余额："+cc.allmoney+"元"+ "\n本月话费：" + cc.monthused+"元");
+					$nobyda.notify("电信余额", "", "我的余额:<em class=\"font06\">¥</em>"+cc.allmoney+"元"+ "\n本月话费：" + cc.monthused+"元");
 				}
 			} catch(eor) {
 				$nobyda.notify("电信余额", "", eor);
