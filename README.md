@@ -28,7 +28,7 @@
 
 如果通知获得cookie成功, 则可以使用此签到脚本。
 
-###QX脚本配置
+### QX脚本配置
 
 [rewrite_local]
 
@@ -38,4 +38,10 @@
 ### 定时任务
 [task_local]
 5 0 * * * https://raw.githubusercontent.com/15321929422/script/main/10001.js, tag=电信余额
+
+
+### 特别感谢(排名不分先后)：
+* [@NobyDa](https://github.com/NobyDa)
+
+* [@chavyleung](https://github.com/chavyleung)
 
