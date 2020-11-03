@@ -317,9 +317,7 @@ if ($nobyda.isRequest) {
                                     }
 
                                 }
-                            }
-
-
+                            });
 
                         }
                     } catch (eor) {
