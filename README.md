@@ -1,3 +1,39 @@
+
+
+## 电信余额查询
+	
+更新时间: 2020.10.30 v1.00
+
+本代码基于野比大佬代码，侵删。
+
+###获取cookie
+开启抓包，关注微信公众号'中国电信营业厅'-查询办-查话费
+
+如果通知获得cookie成功, 则可以使用此签到脚本。
+
+
+
+
+### QX脚本配置
+
+
+
+### 获取电信Cookie
+[rewrite_local]
+
+^http://wt.189.cn/wx/czwap/phonebill2.do url script-request-body https://raw.githubusercontent.com/15321929422/script/main/10001.js
+
+### 定时任务
+[task_local]
+
+5 0 * * * https://raw.githubusercontent.com/15321929422/script/main/10001.js, tag=电信余额
+
+
+### 特别感谢(排名不分先后)：
+* [@NobyDa](https://github.com/NobyDa)
+
+* [@chavyleung](https://github.com/chavyleung)
+
 ## 特别声明: 
 
 * 本仓库发布的Script项目中涉及的任何解锁和解密分析脚本，仅用于测试和学习研究，禁止用于商业用途，不能保证其合法性，准确性，完整性和有效性，请根据情况自行判断.
@@ -16,32 +52,3 @@
 
  **您必须在下载后的24小时内从计算机或手机中完全删除以上内容.**  </br>
 > ***您使用或者复制了本仓库且本人制作的任何脚本，则视为`已接受`此声明，请仔细阅读*** 
-
-## 电信余额查询
-	
-更新时间: 2020.10.30 v1.00
-
-本代码基于野比大佬代码，侵删。
-
-###获取cookie
-开启抓包，关注微信公众号'中国电信营业厅'-查询办-查话费
-
-如果通知获得cookie成功, 则可以使用此签到脚本。
-
-### QX脚本配置
-
-[rewrite_local]
-
-### 获取电信Cookie
-^http://wt.189.cn/wx/czwap/phonebill2.do url script-request-body https://raw.githubusercontent.com/15321929422/script/main/10001.js
-
-### 定时任务
-[task_local]
-5 0 * * * https://raw.githubusercontent.com/15321929422/script/main/10001.js, tag=电信余额
-
-
-### 特别感谢(排名不分先后)：
-* [@NobyDa](https://github.com/NobyDa)
-
-* [@chavyleung](https://github.com/chavyleung)
-
