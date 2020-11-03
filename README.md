@@ -1,4 +1,4 @@
-/*************************
+
     电信余额查询
 	
 更新时间: 2020.10.30 v1.00
@@ -15,4 +15,4 @@
 ^http://wt.189.cn/wx/czwap/phonebill2.do url script-request-body https://raw.githubusercontent.com/15321929422/script/main/10001.js
 [task_local]
 5 0 * * * https://raw.githubusercontent.com/15321929422/script/main/10001.js, tag=电信余额
-*************************/
+
