@@ -295,38 +295,37 @@ if ($nobyda.isRequest) {
                     if (cc.error) {
                         str += "获取余额失败\n";
                     } else {
-			    for (var item of data) {
-                                var flag = item.flag;
-                                if (flag == 1) {
-                                    if (item.symount > 0) {
-                                        str += "国际剩余流量:" + change(item.symount) + "/n";
-                                    }
-                                } else if (flag == 2) {
-                                    if (item.symount > 0) {
-                                        str += "国内剩余流量:" + change(item.symount) + "/n";
-                                    }
-
-                                } else if (flag == 3) {
-                                    if (item.symount > 0) {
-                                        str += "省内剩余流量:" + change(item.symount) + "/n";
-                                    }
-
-                                } else if (flag == 4) {
-                                    if (item.symount > 0) {
-                                        str += "本地剩余流量:" + change(item.symount) + "/n";
-                                    }
-
+                        for (var item of data) {
+                            var flag = item.flag;
+                            if (flag == 1) {
+                                if (item.symount > 0) {
+                                    str += "国际剩余流量:" + change(item.symount) + "/n";
                                 }
-                            };
+                            } else if (flag == 2) {
+                                if (item.symount > 0) {
+                                    str += "国内剩余流量:" + change(item.symount) + "/n";
+                                }
 
+                            } else if (flag == 3) {
+                                if (item.symount > 0) {
+                                    str += "省内剩余流量:" + change(item.symount) + "/n";
+                                }
+
+                            } else if (flag == 4) {
+                                if (item.symount > 0) {
+                                    str += "本地剩余流量:" + change(item.symount) + "/n";
+                                }
+
+                            }
                         }
-                    } catch (eor) {
-                        str += eor + "\n";
-                    } finally {
-					 $nobyda.notify("电信", "", str);
-                     $nobyda.done();
                     }
-                };
+                } catch (eor) {
+                    str += eor + "\n";
+                } finally {
+                    $nobyda.notify("电信", "", str);
+                    $nobyda.done();
+                }
+            };
         } else {
             $nobyda.notify("电信", "", "脚本终止, 未获取Cookie ‼️");
             $nobyda.done()
