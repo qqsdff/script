@@ -3,9 +3,6 @@
     电信余额查询
 	
 更新时间: 2020.10.30 v1.00
-
-
-第一次写，请体谅渣渣代码。
 本代码基于野比大佬代码，侵删。
 
 
@@ -201,7 +198,7 @@ function nobyda() {
   }
   const time = () => {
     const end = ((Date.now() - start) / 1000).toFixed(2)
-    return console.log('\n签到用时: ' + end + ' 秒')
+    return console.log('\n用时: ' + end + ' 秒')
   }
   const done = (value = {}) => {
     if (isQuanX) return $done(value)
@@ -250,7 +247,7 @@ if ($nobyda.isRequest) {
 				if (cc.error) {
 					$nobyda.notify("电信余额", "","获取余额失败");
 				} else {
-					$nobyda.notify("电信余额", "", "我的余额:"+cc.allmoney + "\n本月话费:" + cc.monthused);
+					$nobyda.notify("电信余额", "", "我的余额："+cc.allmoney+"元"+ "\n本月话费：" + cc.monthused+"元");
 				}
 			} catch(eor) {
 				$nobyda.notify("电信余额", "", eor);
