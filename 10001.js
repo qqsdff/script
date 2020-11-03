@@ -326,10 +326,7 @@ if ($nobyda.isRequest) {
 					 $nobyda.notify("电信", "", str);
                      $nobyda.done();
                     }
-                });
-
-
-
+                };
         } else {
             $nobyda.notify("电信", "", "脚本终止, 未获取Cookie ‼️");
             $nobyda.done()
