@@ -320,6 +320,7 @@ function getTraffic(key){
            });}
 		   );
 }
+async function init(){
 if ($nobyda.isRequest) {
     if ($request.headers && $request.url.match(/phonebill2/)) {
         $nobyda.write($request.body.replace("phone=", ""), "dxPhone");
@@ -342,3 +343,5 @@ if ($nobyda.isRequest) {
         $nobyda.done();
     }
 }
+}
+init();
