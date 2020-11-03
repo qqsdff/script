@@ -12,7 +12,7 @@
 
 
 *************************
-【QX脚本配置】 :
+【QX脚本配置】
 *************************
 [rewrite_local]
 # 获取电信Cookie
@@ -33,7 +33,7 @@ function nobyda() {
     const isJSBox = typeof $app != "undefined" && typeof $http != "undefined";
     const isNode = typeof require == "function" && !isJSBox;
     const NodeSet = 'CookieSet.json';
-    const node = (() = >{
+    const node = (() =>{
         if (isNode) {
             const request = require('request');
             const fs = require("fs");
@@ -44,7 +44,7 @@ function nobyda() {
         } else {
             return (null)
         }
-    })() const notify = (title, subtitle, message) = >{
+    })() const notify = (title, subtitle, message) =>{
         if (isQuanX) $notify(title, subtitle, message);
         if (isSurge) $notification.post(title, subtitle, message);
         if (isNode) console.log(`$ {
@@ -59,7 +59,7 @@ function nobyda() {
             body: subtitle ? subtitle + "\n" + message: message
         })
     }
-    const write = (value, key) = >{
+    const write = (value, key) =>{
         if (isQuanX) return $prefs.setValueForKey(value, key) if (isSurge) return $persistentStore.write(value, key) if (isNode) {
             try {
                 if (!node.fs.existsSync(NodeSet)) node.fs.writeFileSync(NodeSet, JSON.stringify({}));
@@ -81,7 +81,7 @@ function nobyda() {
             })
         }
     }
-    const read = (key) = >{
+    const read = (key) =>{
         if (isQuanX) return $prefs.valueForKey(key) if (isSurge) return $persistentStore.read(key) if (isNode) {
             try {
                 if (!node.fs.existsSync(NodeSet)) return null;
@@ -95,7 +95,7 @@ function nobyda() {
             return $file.read(`shared: //${key}.txt`).string
         }
     }
-    const adapterStatus = (response) = >{
+    const adapterStatus = (response) =>{
         if (response) {
             if (response.status) {
                 response["statusCode"] = response.status
@@ -105,7 +105,7 @@ function nobyda() {
         }
         return response
     }
-    const get = (options, callback) = >{
+    const get = (options, callback) =>{
         options.headers['User-Agent'] = 'JD4iPhone/167169 (iPhone; iOS 13.4.1; Scale/3.00)'
         if (isQuanX) {
             if (typeof options == "string") options = {
@@ -115,18 +115,18 @@ function nobyda() {
             //options["opts"] = {
             //  "hints": false
             //}
-            $task.fetch(options).then(response = >{
+            $task.fetch(options).then(response =>{
                 callback(null, adapterStatus(response), response.body)
             },
-            reason = >callback(reason.error, null, null))
+            reason =>callback(reason.error, null, null))
         }
         if (isSurge) {
-            options.headers['X-Surge-Skip-Scripting'] = false $httpClient.get(options, (error, response, body) = >{
+            options.headers['X-Surge-Skip-Scripting'] = false $httpClient.get(options, (error, response, body) =>{
                 callback(error, adapterStatus(response), body)
             })
         }
         if (isNode) {
-            node.request(options, (error, response, body) = >{
+            node.request(options, (error, response, body) =>{
                 callback(error, adapterStatus(response), body)
             })
         }
@@ -143,7 +143,7 @@ function nobyda() {
             $http.get(options);
         }
     }
-    const post = (options, callback) = >{
+    const post = (options, callback) =>{
         options.headers['User-Agent'] = 'JD4iPhone/167169 (iPhone; iOS 13.4.1; Scale/3.00)'
         if (options.body) options.headers['Content-Type'] = 'application/x-www-form-urlencoded'
         if (isQuanX) {
@@ -154,18 +154,18 @@ function nobyda() {
             //options["opts"] = {
             //  "hints": false
             //}
-            $task.fetch(options).then(response = >{
+            $task.fetch(options).then(response =>{
                 callback(null, adapterStatus(response), response.body)
             },
-            reason = >callback(reason.error, null, null))
+            reason =>callback(reason.error, null, null))
         }
         if (isSurge) {
-            options.headers['X-Surge-Skip-Scripting'] = false $httpClient.post(options, (error, response, body) = >{
+            options.headers['X-Surge-Skip-Scripting'] = false $httpClient.post(options, (error, response, body) =>{
                 callback(error, adapterStatus(response), body)
             })
         }
         if (isNode) {
-            node.request.post(options, (error, response, body) = >{
+            node.request.post(options, (error, response, body) =>{
                 callback(error, adapterStatus(response), body)
             })
         }
@@ -181,7 +181,7 @@ function nobyda() {
             $http.post(options);
         }
     }
-    const AnError = (name, keyname, er, resp, body) = >{
+    const AnError = (name, keyname, er, resp, body) =>{
         if (typeof(merge) != "undefined" && keyname) {
             if (!merge[keyname].notify) {
                 merge[keyname].notify = `$ {
@@ -219,10 +219,10 @@ function nobyda() {
             }`: ``
         }`)
     }
-    const time = () = >{
+    const time = () =>{
         const end = ((Date.now() - start) / 1000).toFixed(2) return console.log('\n用时: ' + end + ' 秒')
     }
-    const done = (value = {}) = >{
+    const done = (value = {}) =>{
         if (isQuanX) return $done(value) if (isSurge) isRequest ? $done(value) : $done()
     }
     return {
@@ -254,7 +254,7 @@ function change(num) {
     }
 }
 function getBalance() {
-    return new Promise(resolve = >{
+    return new Promise(resolve =>{
         $nobyda.post({
             url: 'http://wt.189.cn/wx/czwap/phonebill2.do',
             headers: {
@@ -262,7 +262,7 @@ function getBalance() {
             },
             body: "phone=" + key
         },
-        (error, response, data) = >{
+        (error, response, data) =>{
             try {
                 console.log(data);
                 if (error) throw new Error(error);
@@ -281,7 +281,7 @@ function getBalance() {
     });
 }
 function getTraffic() {
-    return new Promise(resolve = >{
+    return new Promise(resolve =>{
         $nobyda.post({
             url: 'http://wt.189.cn//wx/czwap/notll_tcquery3.do',
             headers: {
@@ -289,7 +289,7 @@ function getTraffic() {
             },
             body: "phone=" + key
         },
-        (error, response, data) = >{
+        (error, response, data) =>{
             try {
                 console.log(data);
                 if (error) throw new Error(error);
