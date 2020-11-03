@@ -256,7 +256,7 @@ function getBalance(key){
                 "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
             },
             body: "phone=" + key
-        },function (error, response, data) => {
+        },function (error, response, data){
             try {
                 if (error) throw new Error(error);
                 const cc = JSON.parse(data);
@@ -276,12 +276,12 @@ function getBalance(key){
 function getTraffic(key){
  return new Promise(resolve => {
   $nobyda.post({
-                url: 'http://wt.189.cn//wx/czwap\notll_tcquery3.do',
+                url: 'http://wt.189.cn//wx/czwap/notll_tcquery3.do',
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
                 },
                 body: "phone=" + key
-            }, function(error, response, data) => {
+            }, function(error, response, data){
                 try {
                     if (error) throw new Error(error);
                     const cc = JSON.parse(data);
@@ -341,5 +341,4 @@ if ($nobyda.isRequest) {
         $nobyda.notify("电信", "", "脚本终止, 未获取Cookie ‼️");
         $nobyda.done();
     }
-}
 }
