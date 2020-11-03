@@ -295,25 +295,25 @@ if ($nobyda.isRequest) {
                     if (cc.error) {
                         str += "获取余额失败\n";
                     } else {
-                        $.each(data, function(i, list) {
-                                var flag = list.flag;
+			    for (var item of data) {
+                                var flag = item.flag;
                                 if (flag == 1) {
-                                    if (list.symount > 0) {
-                                        str += "国际剩余流量:" + change(list.symount) + "/n";
+                                    if (item.symount > 0) {
+                                        str += "国际剩余流量:" + change(item.symount) + "/n";
                                     }
                                 } else if (flag == 2) {
-                                    if (list.symount > 0) {
-                                        str += "国内剩余流量:" + change(list.symount) + "/n";
+                                    if (item.symount > 0) {
+                                        str += "国内剩余流量:" + change(item.symount) + "/n";
                                     }
 
                                 } else if (flag == 3) {
-                                    if (list.symount > 0) {
-                                        str += "省内剩余流量:" + change(list.symount) + "/n";
+                                    if (item.symount > 0) {
+                                        str += "省内剩余流量:" + change(item.symount) + "/n";
                                     }
 
                                 } else if (flag == 4) {
-                                    if (list.symount > 0) {
-                                        str += "本地剩余流量:" + change(list.symount) + "/n";
+                                    if (item.symount > 0) {
+                                        str += "本地剩余流量:" + change(item.symount) + "/n";
                                     }
 
                                 }
