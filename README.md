@@ -6,27 +6,23 @@
 
 本代码基于野比大佬代码，侵删。
 
-###获取cookie
-开启抓包，关注微信公众号'中国电信营业厅'-查询办-查话费
-
-如果通知获得cookie成功, 则可以使用此签到脚本。
+### 获取cookie
+开启QX，关注微信公众号'中国电信营业厅'-查询办-查话费,通知获得cookie成功, 则可以使用此脚本。
 
 
 
-
-### QX脚本配置
-
+## QX脚本配置
 
 
 ### 获取电信Cookie
 [rewrite_local]
 
-^http://wt.189.cn/wx/czwap/phonebill2.do url script-request-body https://raw.githubusercontent.com/15321929422/script/main/10001.js
+^http://wt.189.cn/wx/czwap/phonebill2.do url script-request-body https://raw.githubusercontent.com/qqsdff/script/main/10001.js
 
 ### 定时任务
 [task_local]
 
-5 0 * * * https://raw.githubusercontent.com/15321929422/script/main/10001.js, tag=电信余额
+5 0 * * * https://raw.githubusercontent.com/qqsdff/script/main/10001.js, tag=电信余额
 
 
 ### 特别感谢(排名不分先后)：
