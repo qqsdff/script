@@ -29,7 +29,7 @@ const activeEndTime = '2020/11/12 23:59:59';//活动结束时间
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-
+ 
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [],
  cookie = '';
