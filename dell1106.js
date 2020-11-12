@@ -9,7 +9,7 @@
  https://github.com/lxk0301/jd_scripts
  
  
- 戴尔新品上市脚本 https://raw.githubusercontent.com/qqsdff/scripts/dell1106.js
+ 戴尔新品上市脚本 https://raw.githubusercontent.com/qqsdff/script/main/dell1106.js
  活动地址：https://computerdigital.m.jd.com/#/share?shareId=284af206-3a85-4697-adde-195291ef8128&activityId=dell1106&t=1605143153710
  活动时间截止：2020年11月13日 23:59:59
  出现任务做完没领取的情况，就再运行一次脚本，脚本会给内置的shareId助力,介意请删除
