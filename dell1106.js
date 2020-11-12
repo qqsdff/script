@@ -133,6 +133,8 @@ const presellInfoList=homeData.data.presellInfoVO.presellInfoList;
                 console.log(`此任务已做完，跳过`);
             }
         }
+	 console.log('\n任务四：关注公众号，可能有问题');
+	 await doPost(`${JD_API_HOST}/task/getPrize?t=${Date.now()}`,`id=0&activityId=${activeID}&type=4`);
     }
 }
 function doPost(url, body) {
