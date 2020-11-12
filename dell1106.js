@@ -19,14 +19,14 @@
  // quantumultx
  [task_local]
  #戴尔新品上市
- 2 0 * * * https://raw.githubusercontent.com/qqsdff/scripts/dell1106.js, tag=戴尔新品上市, img-url=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/image/jd.png,enabled=true
+ 2 0 * * * https://raw.githubusercontent.com/qqsdff/script/main/dell1106.js, tag=戴尔新品上市, img-url=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/image/jd.png,enabled=true
  
  // Loon
  [Script]
- cron "2 0 * * *" script-path=https://raw.githubusercontent.com/qqsdff/scripts/dell1106.js,tag=戴尔新品上市
+ cron "2 0 * * *" script-path=https://raw.githubusercontent.com/qqsdff/script/main/dell1106.js,tag=戴尔新品上市
  
  // Surge
- 戴尔新品上市 = type=cron,cronexp=2 0 * * *,wake-system=1,timeout=320,script-path=https://raw.githubusercontent.com/qqsdff/scripts/dell1106.js
+ 戴尔新品上市 = type=cron,cronexp=2 0 * * *,wake-system=1,timeout=320,script-path=https://raw.githubusercontent.com/qqsdff/script/main/dell1106.js
  
  // JSBox
  请把cookie 填入数组cookiesArr，
@@ -229,7 +229,17 @@ async function showMsg() {
     if ($.isNode()) await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName || $.UserName}`, `账号${$.index} ${$.nickName || $.UserName}\n做任务之前京豆总计:${$.beanCount}\n做完任务后京豆总计:${$.jdNum}\n${($.jdNum - $.beanCount) > 0 ? `获得京豆：${$.jdNum - $.beanCount}京豆 🐶(仅供参考)\n` : ''}京豆先到先得\n注：如未获得京豆就是已被分完\n活动地址：https://computerdigital.m.jd.com/#/?activityId=dell1106`)
     }
 }
-
+function jsonParse(str) {
+  if (typeof str == "string") {
+    try {
+      return JSON.parse(str);
+    } catch (e) {
+      console.log(e);
+      $.msg($.name, '', '不要在BoxJS手动复制粘贴修改cookie')
+      return [];
+    }
+  }
+}
 //初始化cookie
 function initCookie() {
     if ($.isJsbox()) {
