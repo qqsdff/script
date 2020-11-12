@@ -62,7 +62,12 @@ function init() {
                 $.isLogin = true;
                 $.nickName = '';
                 const beforeTotal = await TotalBean();
-                console.log(`\n ===============开始【京东账号${$.index}】${$.nickName || $.UserName} ==================\n`);
+				console.log(`\n =====开始【京东账号${$.index}】${$.nickName || $.UserName} =====\n`);
+				//获取助力码
+				var resp = await doPost(`${JD_API_HOST}/task/getSupport?t=${Date.now()}`, `activityId=${activeID}`);
+				if(resp.code===200){
+					console.log(`\n 助力码【${resp.data.shareId}】\n`);
+				}
                 if (!$.isLogin) {
                     $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index}${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/`, {"open-url": "https://bean.m.jd.com/"});
                     $.setdata('', `CookieJD${i ? i + 1 : ""}`); //cookie失效，故清空cookie。
