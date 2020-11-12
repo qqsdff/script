@@ -36,7 +36,7 @@
 let cookiesArr = [];
 
 const $= new Env('戴尔新品上市');
-const shareID = ['284af206-3a85-4697-adde-195291ef8128', '1daa0b3c-18ef-40a1-9150-1a467e76b043'];
+const shareID = [];
 const activeID = 'dell1106';
 const activeEndTime = '2020/11/13 23:59:59';
 const JD_API_HOST = 'https://computerdigital.m.jd.com/acd';
