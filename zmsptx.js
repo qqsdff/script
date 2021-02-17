@@ -23,7 +23,7 @@ hostname = api.sxsjyzm.com
 */
 const $ = new Env('芝麻视频提现');
 
-if ($request.headers && $request.url.match(/userWxCashSubmit/)) {
+if ($request!=undefined && $request.url.match(/userWxCashSubmit/)) {
     $.setdata(JSON.stringify($request.body), 'zmtxbody');
     console.log($.getdata('zmtxbody'));
     $.msg($.name, "", '芝嫲视频获取提现body成功!');
@@ -61,7 +61,7 @@ $.msg($.name,"",JSON.parse(response.body).mess)
     console.log(reason.error);
     $done();
 });
-
+    }
 }
 
             
