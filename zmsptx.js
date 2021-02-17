@@ -28,7 +28,8 @@ const $ = new Env('芝麻视频提现');
 if ($request.headers && $request.url.match(/userWxCashSubmit/)) {
     $.setdata(JSON.stringify($request.body), 'zmtxbody');
     console.log(etdata('zmtxbody'));
-    $.msg($.name, "", '芝嫲视频获取提现body成功!') $.done();
+    $.msg($.name, "", '芝嫲视频获取提现body成功!');
+    $.done();
 }
 const url = `https: //api.sxsjyzm.com/api2/loot/userWxCashSubmit`;
 const method = `POST`;
@@ -58,7 +59,7 @@ $.msg($.name,"",JSON.parse(response.body).mess)
 }, reason => {
     console.log(reason.error);
     $done();
-});*/
+});
     
 
 
