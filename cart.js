@@ -9,6 +9,11 @@ https://carbrand.jd.com/lucky-draw/#/index?activityId=1616120828310&_ts=16165267
 cron
 0 8 22-29 3 *
 
+===========Quantumultx===============
+[task_local]
+#奇瑞抽奖
+0 8 22-29 3 * https://raw.githubusercontent.com/qqsdff/script/main/cart.js, tag=奇瑞抽奖,  enabled=true
+
 修改自lxk0301大佬，侵删
  * 
  */
