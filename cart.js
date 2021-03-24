@@ -17,8 +17,7 @@ cron
 修改自lxk0301大佬，侵删
  * 
  */
-const $ = new Env('奇瑞新能源九宫格抽奖
-');
+const $ = new Env('奇瑞新能源九宫格抽奖');
 
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
