@@ -18,7 +18,7 @@ hostname = marketing.xsyxsc.com
 
 
 [task_local]
-*/4 * * * * https://raw.githubusercontent.com/qqsdff/script/main/xsyx.js, tag=兴盛优选小程序, enabled=true
+60/4 * * * * https://raw.githubusercontent.com/qqsdff/script/main/xsyx.js, tag=兴盛优选小程序, enabled=true
 
 
 */
