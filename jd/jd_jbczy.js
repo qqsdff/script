@@ -90,8 +90,6 @@ async function doTask() {
                     var goldCreatorDoTask = await doGet("https://api.m.jd.com/client.action?functionId=goldCreatorDoTask&body=" + encodeURIComponent(JSON.stringify(taskbody)) + "&appid=content_ecology&clientVersion=10.0.0&client=wh5");
                     await $.wait(1000);
                     if (goldCreatorDoTask.isSuccess == true) {
-                        console.log(goldCreatorDoTask.msg + "\n");
-                        console.log('result:' + JSON.stringify(goldCreatorDoTask.result));
                         message += item.shortTitle + "---" + sku.name + "---" + JSON.stringify(goldCreatorDoTask.result) + "\n"
                     }
                     else {
