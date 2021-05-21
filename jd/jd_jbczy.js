@@ -82,12 +82,12 @@ async function doTask() {
             var subTitleInfos = goldCreatorTab.result.subTitleInfos;
             var stageId = goldCreatorTab.result.mainTitleHeadInfo.stageId;
             for (let item of subTitleInfos) {
-                var detailBody = { "groupId": item.matGrpId, "stageId": stageId, "subTitleId": item.subTitleId, "batchId": item.batchId, "skuId": "", "taskId": item.taskId }
-                var goldCreatorDetail = await doGet("https://api.m.jd.com/client.action?functionId=goldCreatorDetail&body=" + encodeURIComponent(detailBody) + "&appid=content_ecology&clientVersion=10.0.0&client=wh5")
+                var detailBody = { "groupId": item.matGrpId, "stageId": stageId, "subTitleId": item.subTitleId, "batchId": item.batchId, "skuId": "", "taskId": Number(item.taskId) }
+                var goldCreatorDetail = await doGet("https://api.m.jd.com/client.action?functionId=goldCreatorDetail&body=" + encodeURIComponent(JSON.stringify(detailBody)) + "&appid=content_ecology&clientVersion=10.0.0&client=wh5")
                 if (goldCreatorDetail.isSuccess == true) {
                     var sku = goldCreatorDetail.result.skuList[0];
-                    var taskbody = { "stageId": stageId, "subTitleId": item.subTitleId, "skuId": sku.skuId, "taskId": item.taskId, "itemId": "3", "rankId": sku.rankId, "type": 1, "batchId": item.batchId }
-                    var goldCreatorDoTask = await doGet("https://api.m.jd.com/client.action?functionId=goldCreatorDoTask&body=" + encodeURIComponent(taskbody) + "&appid=content_ecology&clientVersion=10.0.0&client=wh5");
+                    var taskbody = { "stageId": stageId, "subTitleId": item.subTitleId, "skuId": sku.skuId, "taskId": Number(item.taskId), "itemId": "3", "rankId": sku.rankId, "type": 1, "batchId": item.batchId }
+                    var goldCreatorDoTask = await doGet("https://api.m.jd.com/client.action?functionId=goldCreatorDoTask&body=" + encodeURIComponent(JSON.stringify(taskbody)) + "&appid=content_ecology&clientVersion=10.0.0&client=wh5");
                     if (goldCreatorDoTask.isSuccess == true) {
                         console.log(goldCreatorDoTask.msg + "\n");
                         console.log('result:' + goldCreatorDoTask.result);
