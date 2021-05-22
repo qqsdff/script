@@ -85,20 +85,45 @@ async function doTask() {
                 var detailBody = { "groupId": item.matGrpId, "stageId": stageId, "subTitleId": item.subTitleId, "batchId": item.batchId, "skuId": "", "taskId": Number(item.taskId) }
                 var goldCreatorDetail = await doGet("https://api.m.jd.com/client.action?functionId=goldCreatorDetail&body=" + encodeURIComponent(JSON.stringify(detailBody)) + "&appid=content_ecology&clientVersion=10.0.0&client=wh5")
                 if (goldCreatorDetail.isSuccess == true) {
-                    var sku = goldCreatorDetail.result.skuList[0];
-                    var taskbody = { "stageId": stageId, "subTitleId": item.subTitleId, "skuId": sku.skuId, "taskId": Number(item.taskId), "itemId": "3", "rankId": sku.rankId, "type": 1, "batchId": item.batchId }
-                    var goldCreatorDoTask = await doGet("https://api.m.jd.com/client.action?functionId=goldCreatorDoTask&body=" + encodeURIComponent(JSON.stringify(taskbody)) + "&appid=content_ecology&clientVersion=10.0.0&client=wh5");
-                    await $.wait(1000);
-                    if (goldCreatorDoTask.isSuccess == true) {
-                        message += item.shortTitle + "---" + sku.name + "---" + JSON.stringify(goldCreatorDoTask.result) + "\n"
+                    //主题投票
+                    if (goldCreatorDetail.result.skuList[0] != undefined) {
+                        var sku = goldCreatorDetail.result.skuList[0];
+                        var taskBody = { "stageId": stageId, "subTitleId": item.subTitleId, "skuId": sku.skuId, "taskId": Number(item.taskId), "itemId": "3", "rankId": sku.rankId, "type": 1, "batchId": item.batchId }
+                        var goldCreatorDoTask = await doGet("https://api.m.jd.com/client.action?functionId=goldCreatorDoTask&body=" + encodeURIComponent(JSON.stringify(taskBody)) + "&appid=content_ecology&clientVersion=10.0.0&client=wh5");
+                        await $.wait(500);
+                        if (goldCreatorDoTask.isSuccess == true) {
+                            message += "主题：" + item.shortTitle + "---投票：" + sku.name + "\n";
+                            message += "投票结果：" + JSON.stringify(goldCreatorDoTask.result) + "\n";
+                        }
+                        else {
+                            console.log('执行投票任务失败');
+                        }
                     }
-                    else {
-                        console.log('获取goldCreatorDoTask失败');
+                    //额外任务
+                    if (goldCreatorDetail.result.taskList != undefined) {
+                        for (let task of taskList) {
+                            if (task.taskStatus == 1) {
+                                var taskBody = { "taskId": Number(task.taskId), "itemId": task.taskItemInfo.itemId, "taskType": task.taskType, "batchId": "1" }
+                                var goldCreatorDoTask = await doGet("https://api.m.jd.com/client.action?functionId=goldCreatorDoTask&body=" + encodeURIComponent(JSON.stringify(taskBody)) + "&appid=content_ecology&clientVersion=10.0.0&client=wh5");
+                                await $.wait(500);
+                                if (goldCreatorDoTask.isSuccess == true) {
+                                    message += "执行任务：" + task.taskName + "----" + task.taskItemInfo.title + "\n";
+                                    message += "执行结果：" + JSON.stringify(goldCreatorDoTask.result) + "\n";
+                                }
+                                else {
+                                    console.log('执行额外任务失败');
+                                }
+                            } else if (task.taskStatus == 2) {
+                                message += task.taskName + "----" + task.taskItemInfo.title + "---" + "任务已完成\n";
+
+                            }
+                        }
                     }
                 }
             }
+
         } else {
-            console.log('获取goldCreatorTab失败');
+            console.log('获取主题tab失败');
         }
         await showMsg()
     } catch (e) {
@@ -138,7 +163,6 @@ function doGet(url) {
     })
 
 }
-
 function doPost(url, headers, body) {
     return new Promise(async resolve => {
         //console.log(body);
