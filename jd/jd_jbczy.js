@@ -85,7 +85,6 @@ async function doTask() {
                 var detailBody = { "groupId": item.matGrpId, "stageId": stageId, "subTitleId": item.subTitleId, "batchId": item.batchId, "skuId": "", "taskId": Number(item.taskId) }
                 var goldCreatorDetail = await doGet("https://api.m.jd.com/client.action?functionId=goldCreatorDetail&body=" + encodeURIComponent(JSON.stringify(detailBody)) + "&appid=content_ecology&clientVersion=10.0.0&client=wh5")
                 if (goldCreatorDetail.isSuccess == true) {
-                    console.log(JSON.stringify(goldCreatorDoTask.result));
                     //主题投票
                     if (goldCreatorDetail.result.skuList != undefined) {
                         var sku = goldCreatorDetail.result.skuList[0];
@@ -93,8 +92,8 @@ async function doTask() {
                         var goldCreatorDoTask = await doGet("https://api.m.jd.com/client.action?functionId=goldCreatorDoTask&body=" + encodeURIComponent(JSON.stringify(taskBody)) + "&appid=content_ecology&clientVersion=10.0.0&client=wh5");
                         await $.wait(700);
                         if (goldCreatorDoTask.isSuccess == true) {
-                            message += "主题：" + item.shortTitle + ",投票：" + sku.name + "\n";
-                            message += "投票结果：" + JSON.stringify(goldCreatorDoTask.result) + "\n\n";
+                            message += "主题:" + item.shortTitle + "--投票给:" + sku.name + "\n";
+                            message += "投票结果:" + JSON.stringify(goldCreatorDoTask.result) + "\n\n";
                         }
                         else {
                             console.log('执行投票任务失败');
@@ -103,13 +102,14 @@ async function doTask() {
                     //额外任务
                     if (goldCreatorDetail.result.taskList != undefined) {
                         for (let task of goldCreatorDetail.result.taskList) {
+                            task = task[0];
                             if (task.taskStatus == 1) {
                                 var taskBody = { "taskId": Number(task.taskId), "itemId": task.taskItemInfo.itemId, "taskType": task.taskType, "batchId": "1" }
                                 var goldCreatorDoTask = await doGet("https://api.m.jd.com/client.action?functionId=goldCreatorDoTask&body=" + encodeURIComponent(JSON.stringify(taskBody)) + "&appid=content_ecology&clientVersion=10.0.0&client=wh5");
                                 await $.wait(700);
                                 if (goldCreatorDoTask.isSuccess == true) {
-                                    message += "执行任务：" + task.taskName + "--" + task.taskItemInfo.title + "\n";
-                                    message += "执行结果：" + JSON.stringify(goldCreatorDoTask.result) + "\n\n";
+                                    message += "执行任务:" + task.taskName + "--" + task.taskItemInfo.title + "\n";
+                                    message += "执行结果:" + JSON.stringify(goldCreatorDoTask.result) + "\n\n";
                                 }
                                 else {
                                     console.log('执行额外任务失败');
