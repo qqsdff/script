@@ -15,6 +15,13 @@ https://h5.m.jd.com/babelDiy/Zeus/2H5Ng86mUJLXToEo57qWkJkjFPxw/index.html?fromNa
 #金榜创造营
 0 8 21-31 5-12 * https://raw.githubusercontent.com/qqsdff/script/main/jd/jd_jbczy.js, tag=金榜创造营,  enabled=true
 
+================Loon==============
+[Script]
+cron "0 8 21-31 5-12 *" script-path=https://raw.githubusercontent.com/qqsdff/script/main/jd/jd_jbczy.js,tag=金榜创造营
+
+===============Surge=================
+金榜创造营 = type=cron,cronexp="0 8 21-31 5-12 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/qqsdff/script/main/jd/jd_jbczy.js
+
 修改自lxk0301大佬，侵删
  * 
  */
