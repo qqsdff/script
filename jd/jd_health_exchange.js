@@ -61,6 +61,7 @@ if ($.isNode()) {
         return;
     }
     await jdhealth_getCommodities();
+    await $.wait(1000);
     for (let i = 0; i < cookiesArr.length; i++) {
         if (cookiesArr[i]) {
             cookie = cookiesArr[i];
