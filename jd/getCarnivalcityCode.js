@@ -7,7 +7,7 @@ tg bot @guaguagua_bot
 ===========Quantumultx===============
 [task_local]
 #手机狂欢城助力码
-0 8 9-28 8 * https://raw.githubusercontent.com/qqsdff/script/main/getCarnivalcityCode.js, tag=手机狂欢城助力码,  enabled=true
+0 8 9-28 8 * https://raw.githubusercontent.com/qqsdff/script/main//jd/getCarnivalcityCode.js, tag=手机狂欢城助力码,  enabled=true
 
 
 修改自JDHelloWorld大佬，侵删
