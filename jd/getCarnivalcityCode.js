@@ -75,7 +75,8 @@ $.msg($.name,'助力码',str.substring(0,str.length-1));
 
 async function dotask() {
         try {
-			 await getSupport();
+            await getSupport();
+            await myRank();
              
         } catch (e) {
             $.logErr(e)
@@ -129,7 +130,72 @@ function taskPostUrl(a, t = {}) {
         }
     }
 }
+function myRank() {
+    return new Promise(resolve => {
+        const options = taskPostUrl("/khc/rank/myPastRanks", {});
+        $.post(options, async (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} API请求失败，请检查网路重试`)
+                } else {
+                    //console.log(data)
+                    data = JSON.parse(data);
+                    if (data.code === 200) {
+                        if (data.data && data.data.length) {
+                            for (let i = 0; i < data.data.length; i++) {
+                                $.date = data.data[i]['date'];
+                                if (data.data[i].status === '1') {
+                                    console.log(`开始领取往期奖励【${data.data[i]['prizeName']}】`)
+                                    let res = await saveJbean($.date);
+                                    // console.log('领奖结果', res)
+                                    if (res && res.code === 200) {
+                                        $.beans += Number(res.data);
+                                        console.log(`${data.data[i]['date']}日 【${res.data}】京豆奖励领取成功`)
+                                    } else {
+                                        console.log(`往期奖励领取失败：${JSON.stringify(res)}`);
+                                    }
+                                    await $.wait(500);
+                                } else if (data.data[i].status === '3') {
+                                    console.log(`${data.data[i]['date']}日 【${data.data[i]['prizeName']}】往期京豆奖励已领取~`)
+                                } else {
+                                    console.log(`${data.data[i]['date']}日 【${data.data[i]['status']}】往期京豆奖励，今日争取进入前30000名哦~`)
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp)
+            } finally {
+                resolve(data);
+            }
+        })
+    })
+}
 
+//领取往期奖励API
+function saveJbean(date) {
+    return new Promise(resolve => {
+        const body = { date: date };
+        const options = taskPostUrl('/khc/rank/getRankJingBean', body)
+        $.post(options, (err, resp, data) => {
+            try {
+                console.log('领取京豆结果', data);
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} API请求失败，请检查网路重试`)
+                } else {
+                    data = JSON.parse(data);
+                }
+            } catch (e) {
+                $.logErr(e, resp)
+            } finally {
+                resolve(data);
+            }
+        })
+    })
+}
 function safeGet(data) {
   try {
     if (typeof JSON.parse(data) == "object") {
